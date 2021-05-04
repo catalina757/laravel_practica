@@ -19,14 +19,17 @@ Route::get('/', function () {
     return view('/login');
 });
 
-Route::match(['get', 'post'], '/login', [AuthController::class, 'login'])->name('login');
-Route::match(['get', 'post'], '/register', [AuthController::class, 'register'])->name('register');
+Route::match(['get', 'post'], '/login', [AuthController::class, 'login'])
+     ->name('login');
+Route::match(['get', 'post'], '/register', [AuthController::class, 'register'])
+     ->name('register');
 Route::post('/logout', [AuthController::class, 'logout']);
 
 // forgot pssword
 // activate email
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [HomeController::class, 'index'])
+         ->name('dashboard');
 });
 

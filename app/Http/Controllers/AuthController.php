@@ -6,22 +6,25 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        if($request->isMethod('post')) {
+        if ($request->isMethod('post')) {
             $this->validate($request, [
-                'email'=>'required|email',
-                'password'=>'required'
+                'email'    => 'required|email',
+                'password' => 'required',
             ]);
 
             $user = User::where('email', $request->input('email'))->first();
 
-            if(!$user || !Hash::check($request->input('password'), $user->password)) {
+            if ( ! $user
+                 || ! Hash::check($request->input('password'), $user->password)
+            ) {
                 return redirect('/login')->withErrors([
-                    'login' => 'Email or password incorrect!'
+                    'login' => 'Email or password incorrect!',
                 ])->withInput();
             }
 
@@ -35,30 +38,25 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        // TODO
-        if($request->isMethod('post')) {
+        if ($request->isMethod('post')) {
             $this->validate($request, [
-                'name' => 'required',
-                'email'=>'required|email',
-                'password'=>'required'
+                'name'            => 'required',
+                'email'           => 'required|email|unique:users,email',
+                'password'        => 'required',
+                'passwordRetyped' => 'required|same:password',
             ]);
 
-            $user = User::where('name', $request->input('name'))->first();
 
-            $user = User::where('email', $request->input('email'))->first();
+            User::create([
+                'name'     => $request->name,
+                'email'    => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
 
-            if(!$user || !Hash::check($request->input('password'), $user->password)) {
-                return redirect('/register')->withErrors([
-                    'register' => 'Something incorrect!'
-                ])->withInput();
-            }
+            return redirect('login');
 
-        // return redirect('/dashboard');
-
-            // validate request
-            // create user
-            // login user or activate email
-            // redirect to dashboard or login
+            // TODO
+            // activate email
         }
 
         return view('auth/register');
