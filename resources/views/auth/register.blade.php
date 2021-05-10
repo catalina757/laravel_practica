@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layout.base')
 
 @section('content')
     <div class="register-page">
@@ -14,6 +14,7 @@
                     @if ($errors->has('register'))
                         <div class="alert alert-danger">{{ $errors->first('register') }}</div>
                     @endif
+
                     <form action="{{ route('register') }}" method="post">
                         @csrf
 
@@ -73,6 +74,11 @@
                                 </div>
                             </div>
                         </div>
+
+                        @if ($errors->has('terms'))
+                            <div class="alert alert-danger">{{$errors->first('terms')}}</div>
+                        @endif
+
                         <div class="row">
                             <div class="col-8">
                                 <div class="icheck-primary">

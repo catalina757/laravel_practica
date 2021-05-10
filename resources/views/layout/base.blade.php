@@ -10,10 +10,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
 
-@yield('content')
+<div class="hold-transition sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <!-- Navbar -->
+        @include('components.topbar')
+        @include('components.nav')
+        <div class="content-wrapper" style="min-height: 1170.12px;">
+            @yield('content')
+        </div>
+        @include('components.footer')
+
+
+    </div>
+    <!-- ./wrapper -->
+</div>
 
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 </body>

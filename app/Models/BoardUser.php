@@ -6,17 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Task extends Model
+class BoardUser extends Model
 {
     use HasFactory;
 
-    const STATUS_CREATED = 0;
-    const STATUS_IN_PROGRESS = 1;
-    const STATUS_DONE = 2;
+    public $incrementing = true;
 
-    protected $table = 'tasks';
-
-//    protected $fillable = ['subject', 'description', 'user_id', 'assign_id'];
+    protected $table = 'board_users';
 
     public function board(): BelongsTo
     {
@@ -25,7 +21,6 @@ class Task extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'assignment', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
-
 }

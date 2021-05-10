@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Task;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,10 +16,13 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('subject')->nullable();
-            $table->longText('description')->nullable();
-            $table->integer('user_id')->default(0);
-            $table->integer('assign_id')->default(0);
+            $table->unsignedBigInteger('board_id')->nullable();
+            $table->foreign('board_id')->references('id')->on('boards')->onDelete('cascade');
+            $table->string('name');
+            $table->text('description');
+            $table->unsignedBigInteger('assignment')->nullable();
+            $table->foreign('assignment')->references('id')->on('users')->onDelete('cascade');
+            $table->tinyInteger('status')->default(\App\Models\Task::STATUS_CREATED);
             $table->timestamps();
         });
     }

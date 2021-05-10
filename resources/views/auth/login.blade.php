@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layout.base')
 
 @section('content')
     {{-- @if ($errors->any())
@@ -18,15 +18,21 @@
                 <div class="card-body login-card-body">
                     <p class="login-box-msg">Sign in to start your session</p>
 
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">{{session('status')}}</div>
+                    @endif
+
                     @if ($errors->has('login'))
-                        <div class="alert alert-danger">{{ $errors->first('login') }}</div> @endif
+                        <div class="alert alert-danger">{{ $errors->first('login') }}</div>
+                    @endif
+
                     <form action="{{ route('login') }}" method="post">
                         @csrf
-                        {{-- echivalent cu directiva @csrf de mai sus (pt a proteja aplicatia impotriva atacurilor neautorizate): --}}
-                        {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" /> --}}
 
                         @if ($errors->has('email'))
-                            <div class="alert alert-danger">{{ $errors->first('email') }}</div> @endif
+                            <div class="alert alert-danger">{{ $errors->first('email') }}</div>
+                        @endif
+
                         <div class="input-group mb-3">
                             <input type="email" name="email"
                                    class="form-control @if ($errors->has('email')) is-invalid @endif"
@@ -79,10 +85,10 @@
                     <!-- /.social-auth-links -->
 
                     <p class="mb-1">
-                        <a href="forgot-password.html">I forgot my password</a>
+                        <a href="{{route('password.email')}}">I forgot my password</a>
                     </p>
                     <p class="mb-0">
-                        <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
+                        <a href="{{route('register')}}" class="text-center">Register a new membership</a>
                     </p>
                 </div>
                 <!-- /.login-card-body -->

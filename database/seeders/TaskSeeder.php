@@ -6,7 +6,7 @@ use App\Models\Task;
 use App\Models\User;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+
 
 class TaskSeeder extends Seeder
 {

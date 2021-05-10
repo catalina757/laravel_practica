@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Task;
+
 use App\Models\User;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
         $faker = Factory::create();
 
         for($i = 0; $i < 10; $i++) {
-            $user = User::create([
+            User::create([
                 'name' => $faker->name,
                 'email' => $faker->email,
                 'password' => Hash::make($faker->password)

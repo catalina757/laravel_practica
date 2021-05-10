@@ -9,10 +9,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
-
-        // dd($user);
-
-        return 'DASHBOARD';
+        return view('dashboard.index');
     }
 }
