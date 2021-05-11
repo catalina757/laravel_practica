@@ -1,7 +1,12 @@
 @extends('layout.base')
 
+@include('components.topbar')
+@include('components.nav')
+
+
 @section('content')
     <!-- Content Header (Page header) -->
+    <div class="content-wrapper" style="min-height: 1170.12px;">
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -146,5 +151,7 @@
         </div>
 
     </section>
+    </div>
     <!-- /.content -->
 @endsection
+
