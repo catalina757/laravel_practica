@@ -1,6 +1,3 @@
-
-
-
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="../../index3.html" class="brand-link">
@@ -17,7 +14,7 @@
                 <img src="/images/avatar.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ auth()->user()->name }}</a>
+                <a href="#" class="d-block">{{ auth()->user() }}</a>
             </div>
         </div>
 
@@ -61,8 +58,17 @@
                         </p>
                     </a>
                 </li>
-
             </ul>
+
+            <a class="nav-link text-success btn btn-outline-success" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+               document.getElementById('logout-form').submit();">
+                Logout
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="GET" style="display: one;">
+                {{ csrf_field() }}
+            </form>
         </nav>
         <!-- /.sidebar-menu -->
     </div>

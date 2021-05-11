@@ -15,19 +15,7 @@
 <body>
 
 <div class="hold-transition sidebar-mini">
-    <!-- Site wrapper -->
-    <div class="wrapper">
-        <!-- Navbar -->
-        @include('components.topbar')
-        @include('components.nav')
-        <div class="content-wrapper" style="min-height: 1170.12px;">
-            @yield('content')
-        </div>
-        @include('components.footer')
-
-
-    </div>
-    <!-- ./wrapper -->
+    @yield('content')
 </div>
 
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
