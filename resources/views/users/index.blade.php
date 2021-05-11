@@ -1,10 +1,11 @@
 @extends('layout.base')
 
-@include('components.topbar')
-@include('components.nav')
-
-
 @section('content')
+    <div class="wrapper">
+
+    @include('components.topbar')
+    @include('components.nav')
+
     <!-- Content Header (Page header) -->
     <div class="content-wrapper" style="min-height: 1170.12px;">
     <section class="content-header">
@@ -153,5 +154,8 @@
     </section>
     </div>
     <!-- /.content -->
+        @include('components.footer')
+</div>
 @endsection
+
 
