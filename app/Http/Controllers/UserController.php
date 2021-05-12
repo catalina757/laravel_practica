@@ -10,7 +10,7 @@ class UserController extends Controller
         $users = User::paginate();
 
         return view('users.index', [
-            'users' => $users
+            'users' => $users,
         ]);
     }
 
@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         $user = User::find($request->id);
 
-        if($user !== null) {
+        if ($user !== null) {
             $user->delete();
         }
     }
