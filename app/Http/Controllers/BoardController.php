@@ -7,7 +7,9 @@ use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -48,14 +50,22 @@ class BoardController extends Controller
         );
     }
 
-    public function updateBoard($id)
+    public function updateBoard(Request $request)
     {
+        if(($board = Board::findOrFail($request->id)) && (auth()->user()->role === 1 || $board->user_id === auth()->user()->id)) {
+            $board->update(['name' => $request->name]);
+        }
 
+        return redirect()->back();
     }
 
     public function deleteBoard($id)
     {
+        if(($board = Board::findOrFail($id)) && (auth()->user()->role === 1 || $board->user_id === auth()->user()->id)) {
+            $board->delete();
+        }
 
+        return redirect()->back();
     }
 
     /**
@@ -80,13 +90,16 @@ class BoardController extends Controller
         }
 
         $board = clone $boards;
-        $board = $board->where('id', $id)->first();
+
+        $board = $board->where('id', $id)->with('tasks')->first();
 
         $boards = $boards->select('id', 'name')->get();
 
         if (!$board) {
             return redirect()->route('boards.all');
         }
+
+
 
         return view(
             'boards.view',

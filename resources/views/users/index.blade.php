@@ -38,53 +38,53 @@
             <div class="card-body">
                 <table class="table table-bordered">
                     <thead>
-                        <tr>
-                            <th style="width: 10px">#</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Is Verified</th>
-                            <th style="width: 100px">Role</th>
-                            <th style="width: 40px">Actions</th>
-                        </tr>
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Is Verified</th>
+                        <th style="width: 100px">Role</th>
+                        <th style="width: 40px">Actions</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
-                            <tr>
-                                <td>{{$user->id}}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>
-                                    @if ($user->email_verified_at)
-                                        <span class="badge bg-primary">Verified</span>
-                                    @else
-                                        <span class="badge bg-warning">Unverified</span>
-                                    @endif
-                                </td>
-                                <td>{{$user->role === \App\Models\User::ROLE_ADMIN ? 'Admin' : 'User'}}</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <button class="btn btn-xs btn-primary"
-                                                type="button"
-                                                data-user="{{json_encode($user)}}"
-                                                data-toggle="modal"
-                                                data-target="#userEditModal">
-                                            <i class="fas fa-edit"></i></button>
-                                        <button class="btn btn-xs btn-default"
-                                                type="button"
-                                                data-user="{{json_encode($user)}}"
-                                                data-toggle="modal"
-                                                data-target="#userEditModalAjax">
-                                            <i class="fas fa-edit"></i></button>
-                                        <button class="btn btn-xs btn-danger"
-                                                type="button"
-                                                data-user="{{json_encode($user)}}"
-                                                data-toggle="modal"
-                                                data-target="#userDeleteModal">
-                                            <i class="fas fa-trash"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
+                    @foreach ($users as $user)
+                        <tr>
+                            <td>{{$user->id}}</td>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>
+                                @if ($user->email_verified_at)
+                                    <span class="badge bg-primary">Verified</span>
+                                @else
+                                    <span class="badge bg-warning">Unverified</span>
+                                @endif
+                            </td>
+                            <td>{{$user->role === \App\Models\User::ROLE_ADMIN ? 'Admin' : 'User'}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-xs btn-primary"
+                                            type="button"
+                                            data-user="{{json_encode($user)}}"
+                                            data-toggle="modal"
+                                            data-target="#userEditModal">
+                                        <i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-xs btn-default"
+                                            type="button"
+                                            data-user="{{json_encode($user)}}"
+                                            data-toggle="modal"
+                                            data-target="#userEditModalAjax">
+                                        <i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-xs btn-danger"
+                                            type="button"
+                                            data-user="{{json_encode($user)}}"
+                                            data-toggle="modal"
+                                            data-target="#userDeleteModal">
+                                        <i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -101,13 +101,17 @@
                         <li class="page-item"><span class="page-link page-active">...</span></li>
                     @endif
                     @if ($users->currentPage() >= 3)
-                        <li class="page-item"><a class="page-link" href="{{$users->url($users->currentPage() - 1)}}">{{$users->currentPage() - 1}}</a></li>
+                        <li class="page-item"><a class="page-link"
+                                                 href="{{$users->url($users->currentPage() - 1)}}">{{$users->currentPage() - 1}}</a>
+                        </li>
                     @endif
 
                     <li class="page-item"><span class="page-link page-active">{{$users->currentPage()}}</span></li>
 
                     @if ($users->currentPage() <= $users->lastPage() - 2)
-                        <li class="page-item"><a class="page-link" href="{{$users->url($users->currentPage() + 1)}}">{{$users->currentPage() + 1}}</a></li>
+                        <li class="page-item"><a class="page-link"
+                                                 href="{{$users->url($users->currentPage() + 1)}}">{{$users->currentPage() + 1}}</a>
+                        </li>
                     @endif
 
                     @if ($users->currentPage() < $users->lastPage() - 2)
@@ -115,7 +119,9 @@
                     @endif
 
                     @if ($users->currentPage() < $users->lastPage() )
-                        <li class="page-item"><a class="page-link" href="{{$users->url($users->lastPage())}}">{{$users->lastPage()}}</a></li>
+                        <li class="page-item"><a class="page-link"
+                                                 href="{{$users->url($users->lastPage())}}">{{$users->lastPage()}}</a>
+                        </li>
                         <li class="page-item"><a class="page-link" href="{{$users->nextPageUrl()}}">&raquo;</a></li>
                     @endif
                 </ul>
@@ -136,7 +142,7 @@
                         </div>
                         <div class="modal-body">
                             <div id="userEditName"></div>
-                            <input type="hidden" name="id" id="userEditId" value="" />
+                            <input type="hidden" name="id" id="userEditId" value=""/>
                             <div class="form-group">
                                 <label for="userEditRole">Role</label>
                                 <select class="custom-select rounded-0" name="role" id="userEditRole">
@@ -168,7 +174,7 @@
                     <div class="modal-body">
                         <div class="alert alert-danger hidden" id="userEditAlert"></div>
                         <div id="userEditNameAjax"></div>
-                        <input type="hidden" id="userEditIdAjax" value="" />
+                        <input type="hidden" id="userEditIdAjax" value=""/>
                         <div class="form-group">
                             <label for="userEditRoleAjax">Role</label>
                             <select class="custom-select rounded-0" id="userEditRoleAjax">
@@ -196,7 +202,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="alert alert-danger hidden" id="userDeleteAlert"></div>
-                        <input type="hidden" id="userDeleteId" value="" />
+                        <input type="hidden" id="userDeleteId" value=""/>
                         <p>Are you sure you want to delete: <span id="userDeleteName"></span>?</p>
                     </div>
                     <div class="modal-footer justify-content-between">

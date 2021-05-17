@@ -76,3 +76,70 @@ $(document).ready(function() {
         window.location.href = '/board/' + id;
     });
 });
+
+
+$('#boardDeleteModal').on('shown.bs.modal', function(event) {
+    let button = $(event.relatedTarget); // Button that triggered the modal
+    let board = button.data('board');
+
+    let modal = $(this);
+
+    modal.find('#boardDeleteId').val(board.id);
+    modal.find('#boardDeleteName').text(board.name);
+});
+
+$(document).ready(function() {
+    // $('#userEditButtonAjax').on('click', function() {
+    //     $('#userEditAlert').addClass('hidden');
+    //
+    //     let id = $('#userEditIdAjax').val();
+    //     let role = $('#userEditRoleAjax').val();
+    //
+    //     $.ajax({
+    //         method: 'POST',
+    //         url: '/user-update/' + id,
+    //         data: {role: role}
+    //     }).done(function(response) {
+    //         if (response.error !== '') {
+    //             $('#userEditAlert').text(response.error).removeClass('hidden');
+    //         } else {
+    //             window.location.reload();
+    //         }
+    //     });
+    // });
+
+    $('#boardDeleteButton').on('click', function() {
+        $('#boardDeleteAlert').addClass('hidden');
+        let id = $('#boardDeleteId').val();
+
+        $.ajax({
+            method: 'POST',
+            url: '/board/delete/' + id
+        }).done(function(response) {
+            if (response.error !== '') {
+                $('#boardDeleteAlert').text(response.error).removeClass('hidden');
+            } else {
+                window.location.reload();
+            }
+        });
+    });
+
+    // $('#changeBoard').on('change', function() {
+    //     let id = $(this).val();
+    //
+    //     window.location.href = '/board/' + id;
+    // });
+
+    $('#boardEditModal').on('shown.bs.modal', function(event) {
+        let button = $(event.relatedTarget); // Button that triggered the modal
+        let board = button.data('board');
+
+        let modal = $(this);
+
+        modal.find('#editBoardId').val(board.id);
+        modal.find('#editBoardName').val(board.name);
+    });
+});
+
+
+
