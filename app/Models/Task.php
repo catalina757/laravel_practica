@@ -46,8 +46,6 @@ class Task extends Model
     /** @var string */
     protected $table = 'tasks';
 
-    protected $with = 'user';
-
     /**
      * @return BelongsTo
      */

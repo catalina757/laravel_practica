@@ -51,16 +51,16 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{route('logout')}}" class="nav-link">
+                        <i class="nav-icon fas fa-columns"></i>
+                        <p>
+                            Logout
+                        </p>
+                    </a>
+                </li>
             </ul>
-
-            <a class="nav-link text-danger btn btn-outline-danger" href="{{ route('logout') }}"
-               onclick="event.preventDefault();
-               document.getElementById('logout-form').submit();">
-                Logout</a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="GET" style="display: none;">
-                {{ csrf_field() }}
-            </form>
         </nav>
         <!-- /.sidebar-menu -->
     </div>
