@@ -25,6 +25,7 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Boards list</h3>
+                <button type="button" data-toggle="modal" data-target="#boardAddModal" class="btn btn-primary float-right">Add board</button>
             </div>
 
             <div class="card-body">
@@ -106,6 +107,32 @@
             </div>
         </div>
         <!-- /.card -->
+
+        <div class="modal fade" id="boardAddModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add board</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="post" action="{{ route('boards.add') }}">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="boardAddName">Name</label>
+                                <input type="text" class="form-control" name="boardName" id="boardAddName" placeholder="Board Name" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add board</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <div class="modal fade" id="boardEditModal">
             <div class="modal-dialog">

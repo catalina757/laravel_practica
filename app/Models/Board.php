@@ -38,6 +38,8 @@ class Board extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name','user_id'];
+
     /** @var string */
     protected $table = 'boards';
 

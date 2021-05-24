@@ -138,6 +138,15 @@ class BoardController extends Controller
         return response()->json(['error' => $error, 'success' => $success]);
     }
 
+    public function addBoard(Request $request)
+    {
+        Board::create([
+            'name' => $request->boardName,
+            'user_id' => auth()->user()->id
+        ]);
+
+        return redirect()->back();
+    }
     /**
      * @param $id
      *
@@ -251,4 +260,16 @@ class BoardController extends Controller
 
         return response()->json(['error' => $error, 'success' => $success]);
     }
+
+    public function addTask(Request $request)
+    {
+        Task::create([
+            'board_id' => $request->boardId,
+            'name' => $request->taskName,
+            'description' => $request->taskDescription
+        ]);
+
+        return redirect()->back();
+    }
+
 }

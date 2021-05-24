@@ -42,6 +42,7 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Task list</h3>
+                <button type="button" data-toggle="modal" data-target="#taskAddModal" class="btn btn-primary float-right">Add task</button>
             </div>
 
             <div class="card-body">
@@ -128,6 +129,38 @@
             </div>
         </div>
         <!-- /.card -->
+
+        <div class="modal fade" id="taskAddModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add task</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="post" action="{{ route('tasks.add') }}">
+                        @csrf
+                        <input type="hidden" name="boardId" value="{{ $board->id }}">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="taskAddName">Name</label>
+                                <input type="text" class="form-control" name="taskName" id="taskAddName" placeholder="Task Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="taskAddDescription">Description</label>
+                                <textarea class="form-control" name="taskDescription" id="taskAddDescription" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add task</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
 
         <div class="modal fade" id="taskEditModal">
             <div class="modal-dialog">
